@@ -46,15 +46,38 @@ router.post('/login', async (req, res) => {
   //email exists?
   const chef = await Chefs.findOne({ email: req.body.email });
   if (!chef) return res.status(400).send('Email is invalid');
-
+try{
   //password correct?
   const validpass = await bcrypt.compare(req.body.password, chef.password);
   if (!validpass) return res.status(400).send('Invalid pass');
 
   //Create and assign a token
-  const token = jwt.sign({ _id: chef._id }, process.env.TOKEN_SECRET);
-  res.header('auth-token', token).send(token);
+  const token = jwt.sign({ _id: chef._id }, secret);
+  res.header('auth-token', token).send({ message: `Welcome, Chef! Have a token: ${token}`});
+} catch {
+  res.status(500).send({error: 'no token!'})
+}
 });
+
+
+// router.get('/:chefId', (req, res, next) => {
+//   const id = req.params.chefId;
+//   Chefs.find(id)
+//     .exec()
+//     .then(doc => {
+//       if (doc) {
+//         res.status(200).json(doc);
+//       } else {
+//         res.status(404).json({ message: 'no valid entry found for this id' });
+//       }
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       res.status(500).json({ error: err });
+//     });
+// });
+
+
 
 //UPDATE chef account info
 router.put('/:userId', checkAuth, function(req, res) {
@@ -120,33 +143,6 @@ router.delete('/:userId', checkAuth, function(req, res) {
 //       res.status(500).json(err);
 //     });
 //   // res.status(200).json({ message: 'GET all chefs' });
-// });
-
-// //Find Chef by ID
-// router.get('/:chefId',  checkAuth, (req, res, next) => {
-//   const id = req.params.chefId;
-//   Chefs.findById(id)
-//     .select('name email location _id')
-//     .exec()
-//     .then(doc => {
-//       console.log('from database', doc);
-//       if (doc) {
-//         res.status(200).json({
-//           chef: doc,
-//           request: {
-//             type: 'GET',
-//             description: 'GET one Chef by _id',
-//             url: 'https://chefportfoliopt4.herokuapp.com/chefs/' + doc._id
-//           }
-//         });
-//       } else {
-//         res.status(404).json({ message: 'No valid entry found for this id' });
-//       }
-//     })
-//     .catch(err => {
-//       console.log(err);
-//       res.status(500).json({ error: err });
-//     });
 // });
 
 //UPDATE Chef using Patch
