@@ -4,15 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "server": "node index.js"
+    "start": "nodemon index.js",
+    "server": "nodemon index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chefportfolio719/chefportfolio-BE-Michael.git"
   },
   "keywords": [],
-  "author": "Jasmine & Micheal",
+  "author": "Jasmine & Michael",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/chefportfolio719/chefportfolio-BE-Michael/issues"
@@ -22,13 +22,17 @@
     "@hapi/joi": "^15.1.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "concurrently": "^4.1.1",
+    "config": "^3.2.1",
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
+    "express-validator": "^6.1.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.6.4",
     "morgan": "^1.9.1",
     "multer": "^1.4.1",
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "request": "^2.88.0"
   }
 }

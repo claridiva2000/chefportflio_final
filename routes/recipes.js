@@ -53,7 +53,7 @@ router.get('/', (req, res, next) => {
     .select(
       'name ingredients instructions picture description mealtype breakfast lunch dinner dessert snack'
     )
-    .populate('chef', 'name location')
+    .populate('chef', 'firstname lastname location')
     .exec()
     .then(docs => {
       res.status(200).json(docs);
@@ -70,7 +70,7 @@ router.get('/:dishId', (req, res, next) => {
     .select(
       'name ingredients instructions picture description mealtype breakfast lunch dinner dessert snack _id recipeImg chef'
     )
-    .populate('chef', 'name location')
+    .populate('chef', 'firstname lastname location')
     .exec()
     .then(doc => {
       if (doc) {
