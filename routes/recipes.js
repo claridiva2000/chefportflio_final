@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const checkAuth = require('../middleware/verifytoken');
+// const checkAuth = require('../middleware/verifytoken');
 
 const Recipes = require('../models/recipe-model');
 
@@ -25,6 +25,7 @@ router.post('/', function(req, res) {
   recipe.dessert = req.body.dessert;
   recipe.snack = req.body.snack;
   recipe.chef = req.body.chef;
+  recipe.favorite = req.body.favorite;
 
   recipe.save(function(err) {
     if (err) {
@@ -51,7 +52,7 @@ router.post('/', function(req, res) {
 router.get('/', (req, res, next) => {
   Recipes.find()
     .select(
-      'name ingredients instructions picture description mealtype breakfast lunch dinner dessert snack'
+      'name ingredients instructions picture description mealtype breakfast lunch dinner dessert snack favorite'
     )
     .populate('chef', 'firstname lastname location')
     .exec()
@@ -95,6 +96,7 @@ router.put('/:dishId', function(req, res) {
   dish.instructions = req.body.instructions;
   dish.mealtype = req.body.mealtype;
   dish.chef = req.body.chef;
+  dish.favorite = req.body.favorite;
 
   let query = { _id: req.params.dishId };
 
