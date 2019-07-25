@@ -6,7 +6,7 @@ const checkAuth = require('../middleware/verifytoken');
 const Recipes = require('../models/recipe-model');
 
 //Add Recipe
-router.post('/', checkAuth, function(req, res) {
+router.post('/', function(req, res) {
   const recipe = new Recipes();
   recipe._id = new mongoose.Types.ObjectId();
   recipe.name = req.body.name;
@@ -86,7 +86,7 @@ router.get('/:dishId', (req, res, next) => {
 });
 
 //UPDATE recipe
-router.put('/:dishId', checkAuth, function(req, res) {
+router.put('/:dishId', function(req, res) {
   let dish = {};
   dish.name = req.body.name;
   dish.ingredients = req.body.ingredients;
@@ -109,7 +109,7 @@ router.put('/:dishId', checkAuth, function(req, res) {
 });
 
 //Delete Recipe
-router.delete('/:dishId', checkAuth, function(req, res) {
+router.delete('/:dishId', function(req, res) {
   let query = { _id: req.params.dishId };
 
   Recipes.remove(query, function(err) {
