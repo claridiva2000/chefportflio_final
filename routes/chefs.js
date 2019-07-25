@@ -13,6 +13,8 @@ const { check, validationResult } = require('express-validator/check');
 
 const Chefs = require('../models/chef-model');
 
+
+//REGISTER
 router.post(
   '/register',
   [
@@ -169,7 +171,7 @@ router.get('/', checkAuth, async (req, res, next) => {
 
 
 //UPDATE chef account info
-router.put('/:userId', checkAuth, function(req, res) {
+router.put('/:userId', function(req, res) {
   let chef = {};
   chef.firstname = req.body.firstname;
   chef.lastname= req.body.lastname;
@@ -190,7 +192,7 @@ router.put('/:userId', checkAuth, function(req, res) {
 });
 
 //Delete chef account entirely
-router.delete('/:userId', checkAuth, function(req, res) {
+router.delete('/:userId', function(req, res) {
   let query = { _id: req.params.userId };
 
   Chefs.remove(query, function(err) {

@@ -14,7 +14,9 @@ const recipeSchema = mongoose.Schema({
   dinner: { type: Boolean, default: false },
   dessert: { type: Boolean, default: false },
   snack: { type: Boolean, default: false },
-  chef: { type: mongoose.Schema.Types.ObjectId, ref: 'Chefs', required: true }
+  chef: { type: mongoose.Schema.Types.ObjectId, ref: 'Chefs', required: true },
+  favorite: {type: Boolean, default: false}
+
 });
 
 module.exports = mongoose.model('Recipes', recipeSchema);
